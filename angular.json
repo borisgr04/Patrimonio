@@ -70,7 +70,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/patrimonio-os-arriendos/"
+              "baseHref": "/Patrimonio/"
             },
             "development": {
               "optimization": false,
