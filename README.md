@@ -12,6 +12,11 @@ npm run build:gh
 npm run deploy
 ```
 
+## Despliegue en GitHub Pages
+
+- URL: https://borisgr04.github.io/Patrimonio/
+- El script `npm run deploy` publica el build de producción en esa ruta.
+
 ## Módulos incluidos
 
 - Dashboard con resumen mensual, alertas y accesos rápidos
