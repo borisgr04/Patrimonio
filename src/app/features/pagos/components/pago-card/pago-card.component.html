@@ -1,0 +1,27 @@
+@if (pago(); as item) {
+  <app-card [title]="arrendatario()" [subtitle]="inmueble() + ' · ' + item.mesCorresponde">
+    <div class="space-y-4 text-sm">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <p class="font-medium">Pagó {{ item.valorPagado | currencyCop }}</p>
+          <p class="pos-subtle">Esperado {{ item.valorEsperado | currencyCop }}</p>
+        </div>
+        <app-pago-estado-badge [pago]="item" />
+      </div>
+      @if ((item.saldoPendiente ?? 0) > 0) {
+        <p
+          class="rounded-2xl bg-[color-mix(in_srgb,var(--app-warning)_15%,transparent)] px-3 py-2 text-[var(--app-warning)]"
+        >
+          Saldo pendiente: {{ item.saldoPendiente | currencyCop }} · {{ diasMora() }} días
+          transcurridos
+        </p>
+      }
+      <div class="flex flex-wrap gap-2">
+        <a mat-button [routerLink]="['/pagos/nuevo', item.contratoId]">Registrar otro pago</a>
+        @if (whatsappLink()) {
+          <app-whatsapp-button [link]="whatsappLink()" />
+        }
+      </div>
+    </div>
+  </app-card>
+}

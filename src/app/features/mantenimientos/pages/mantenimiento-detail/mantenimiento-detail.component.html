@@ -1,0 +1,33 @@
+<app-page-header
+  [title]="id() ? 'Detalle del mantenimiento' : 'Nuevo mantenimiento'"
+  description="Documente proveedores, costos y estado de cada intervención."
+  actionLabel="Volver a mantenimientos"
+  actionLink="/mantenimientos"
+/>
+
+<app-mantenimiento-form
+  [mantenimiento]="mantenimiento()"
+  [inmuebles]="inmuebles"
+  (guardar)="guardar($event)"
+/>
+
+@if (mantenimiento(); as item) {
+  <div class="mt-6">
+    <app-card title="Resumen del servicio" [subtitle]="nombreInmueble(item.inmuebleId)">
+      <dl class="grid gap-3 text-sm">
+        <div class="flex justify-between gap-3">
+          <dt>Proveedor</dt>
+          <dd>{{ item.proveedor }}</dd>
+        </div>
+        <div class="flex justify-between gap-3">
+          <dt>Costo</dt>
+          <dd>{{ item.costoTotal | currencyCop }}</dd>
+        </div>
+        <div class="flex justify-between gap-3">
+          <dt>Fecha</dt>
+          <dd>{{ item.fechaMantenimiento | fechaEs }}</dd>
+        </div>
+      </dl>
+    </app-card>
+  </div>
+}

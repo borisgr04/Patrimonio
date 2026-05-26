@@ -1,0 +1,40 @@
+<app-page-header
+  title="Pagos"
+  description="Revise el recaudo mensual, identifique saldos pendientes y active recordatorios por WhatsApp."
+/>
+
+@if (agrupados().length) {
+  <div class="space-y-6">
+    @for (grupo of agrupados(); track grupo[0]) {
+      <section>
+        <div class="mb-3 flex items-center justify-between">
+          <h2 class="text-xl font-semibold">{{ grupo[0] }}</h2>
+          <span class="pos-subtle text-sm">{{ grupo[1].length }} registros</span>
+        </div>
+        <div class="grid gap-4 lg:grid-cols-2">
+          @for (pago of grupo[1]; track pago.id) {
+            <app-pago-card
+              [pago]="pago"
+              [arrendatario]="nombreArrendatario(pago.contratoId)"
+              [inmueble]="nombreInmueble(pago.contratoId)"
+              [whatsappLink]="
+                enlaceWhatsapp(
+                  pago.contratoId,
+                  pago.valorPagado || pago.valorEsperado,
+                  pago.mesCorresponde,
+                  pago.numeroComprobante,
+                  (pago.saldoPendiente ?? 0) > 0
+                )
+              "
+            />
+          }
+        </div>
+      </section>
+    }
+  </div>
+} @else {
+  <app-empty-state
+    title="Sin pagos registrados"
+    description="Cuando registre un pago aparecerá agrupado por mes."
+  />
+}

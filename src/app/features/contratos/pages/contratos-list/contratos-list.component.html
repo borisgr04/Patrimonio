@@ -1,0 +1,23 @@
+<app-page-header
+  title="Contratos"
+  description="Cree contratos con wizard en tres pasos, visualice vencimientos y consulte pagos asociados."
+  actionLabel="Nuevo contrato"
+  actionLink="/contratos/nuevo"
+/>
+
+@if (store.contratos().length) {
+  <div class="grid gap-4 lg:grid-cols-2">
+    @for (contrato of store.contratos(); track contrato.id) {
+      <app-contrato-card
+        [contrato]="contrato"
+        [arrendatario]="nombrePersona(contrato.arrendatarioId)"
+        [inmueble]="nombreInmueble(contrato.inmuebleId)"
+      />
+    }
+  </div>
+} @else {
+  <app-empty-state
+    title="No hay contratos registrados"
+    description="Inicie el wizard para vincular inmueble, arrendatario y codeudor."
+  />
+}

@@ -1,0 +1,31 @@
+<app-page-header
+  title="Inmuebles"
+  description="Administre sus propiedades, cambie estados rápidamente y consulte historial de contratos y mantenimientos."
+  actionLabel="Nuevo inmueble"
+  actionLink="/inmuebles/nuevo"
+/>
+
+<div class="mb-6">
+  <mat-form-field>
+    <mat-label>Buscar por estado, tipo o ciudad</mat-label>
+    <input matInput [ngModel]="store.filtro()" (ngModelChange)="store.filtrar($event)" />
+  </mat-form-field>
+</div>
+
+@if (store.filtrados().length) {
+  <div class="grid gap-4 lg:grid-cols-2">
+    @for (inmueble of store.filtrados(); track inmueble.id) {
+      <app-inmueble-card
+        [inmueble]="inmueble"
+        (cambiarEstado)="actualizarEstado(inmueble.id, $event)"
+      />
+    }
+  </div>
+} @else {
+  <app-empty-state
+    title="No hay inmuebles para mostrar"
+    description="Cree un inmueble o ajuste el filtro de búsqueda."
+  >
+    <a mat-flat-button href="/inmuebles/nuevo">Crear inmueble</a>
+  </app-empty-state>
+}

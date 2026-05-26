@@ -1,0 +1,43 @@
+<section class="space-y-6">
+  <header>
+    <h1 class="text-3xl font-semibold tracking-tight">Dashboard</h1>
+    <p class="pos-subtle mt-2 text-sm">
+      Resumen operativo de inmuebles, contratos, pagos y mantenimientos.
+    </p>
+  </header>
+
+  <div class="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+    <app-resumen-canon [esperado]="canonEsperado()" [recaudado]="pagosStore.totalRecaudado()" />
+    <app-estado-inmuebles
+      [disponibles]="inmueblesStore.disponibles().length"
+      [arrendados]="inmueblesStore.arrendados().length"
+      [mantenimientos]="inmueblesStore.enMantenimiento().length"
+    />
+  </div>
+
+  <div class="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+    <app-alertas-pago [proximos]="proximos()" [enMora]="mora()" />
+    <app-card title="Últimos mantenimientos pendientes" subtitle="Seguimiento operativo">
+      @if (mantenimientosStore.pendientes().length) {
+        <ul class="space-y-3 text-sm">
+          @for (item of mantenimientosStore.pendientes(); track item.id) {
+            <li class="rounded-2xl bg-[var(--app-surface-muted)] p-3">
+              {{ item.tipoMantenimiento }} · {{ item.proveedor }}
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="pos-subtle text-sm">No hay mantenimientos pendientes.</p>
+      }
+    </app-card>
+  </div>
+
+  <app-card title="Accesos rápidos" subtitle="Navegación principal">
+    <div class="flex flex-wrap gap-3">
+      <a mat-flat-button routerLink="/inmuebles">Ir a inmuebles</a>
+      <a mat-flat-button routerLink="/contratos">Ir a contratos</a>
+      <a mat-flat-button routerLink="/pagos">Ir a pagos</a>
+      <a mat-flat-button routerLink="/mantenimientos">Ir a mantenimientos</a>
+    </div>
+  </app-card>
+</section>

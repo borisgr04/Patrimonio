@@ -1,0 +1,31 @@
+@if (contrato(); as item) {
+  <app-card [title]="item.numeroContrato" [subtitle]="inmueble()">
+    <div class="space-y-4 text-sm">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <p class="font-medium">{{ arrendatario() }}</p>
+          <p class="pos-subtle">{{ item.fechaInicio | fechaEs }} → {{ item.fechaFin | fechaEs }}</p>
+        </div>
+        <app-contrato-estado-badge [estado]="item.estado" />
+      </div>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <div>
+          <span class="pos-subtle">Canon</span>
+          <p class="font-medium">{{ item.canonMensual | currencyCop }}</p>
+        </div>
+        <div>
+          <span class="pos-subtle">Medio de pago</span>
+          <p class="font-medium">{{ item.medioPago }}</p>
+        </div>
+      </div>
+      @if (vencePronto()) {
+        <p
+          class="rounded-2xl bg-[color-mix(in_srgb,var(--app-warning)_15%,transparent)] px-3 py-2 text-[var(--app-warning)]"
+        >
+          Este contrato vence en menos de 60 días.
+        </p>
+      }
+      <a mat-stroked-button [routerLink]="['/contratos', item.id]">Ver detalle</a>
+    </div>
+  </app-card>
+}

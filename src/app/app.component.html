@@ -1,0 +1,50 @@
+<div class="min-h-screen bg-[var(--app-bg)] text-[var(--app-text)]">
+  <mat-toolbar
+    class="toolbar sticky top-0 z-20 flex justify-between gap-3 border-b border-[var(--app-border)] px-4 py-3"
+  >
+    <div class="flex items-center gap-3">
+      <a routerLink="/dashboard" class="text-xl font-semibold tracking-tight">🏠 Arriendos</a>
+      <nav class="hidden items-center gap-2 md:flex">
+        @for (enlace of enlaces; track enlace.href) {
+          <a
+            [routerLink]="enlace.href"
+            routerLinkActive="nav-activo"
+            class="rounded-full px-3 py-2 text-sm transition hover:bg-[var(--app-surface-muted)]"
+          >
+            {{ enlace.label }}
+          </a>
+        }
+      </nav>
+    </div>
+
+    <div class="hidden items-center gap-2 md:flex">
+      <app-theme-toggle />
+    </div>
+
+    <div class="flex items-center gap-2 md:hidden">
+      <app-theme-toggle />
+      <button mat-stroked-button type="button" (click)="alternarMenu()">☰</button>
+    </div>
+  </mat-toolbar>
+
+  @if (menuAbierto()) {
+    <nav class="border-b border-[var(--app-border)] bg-[var(--app-surface)] px-4 py-3 md:hidden">
+      <div class="flex flex-col gap-2">
+        @for (enlace of enlaces; track enlace.href) {
+          <a
+            [routerLink]="enlace.href"
+            routerLinkActive="nav-activo"
+            class="rounded-2xl px-3 py-2 text-sm transition hover:bg-[var(--app-surface-muted)]"
+            (click)="cerrarMenu()"
+          >
+            {{ enlace.label }}
+          </a>
+        }
+      </div>
+    </nav>
+  }
+
+  <main class="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <router-outlet />
+  </main>
+</div>

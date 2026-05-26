@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+.toolbar {
+  background: color-mix(in srgb, var(--app-surface) 92%, transparent);
+  backdrop-filter: blur(14px);
+  color: var(--app-text);
+}
+
+.nav-activo {
+  background: var(--app-accent);
+  color: var(--app-accent-contrast);
+}

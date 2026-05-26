@@ -1,0 +1,25 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-neutral {
+  background: var(--app-surface-muted);
+  color: var(--app-text);
+}
+.badge-success {
+  background: color-mix(in srgb, var(--app-success) 18%, transparent);
+  color: var(--app-success);
+}
+.badge-warning {
+  background: color-mix(in srgb, var(--app-warning) 18%, transparent);
+  color: var(--app-warning);
+}
+.badge-danger {
+  background: color-mix(in srgb, var(--app-danger) 18%, transparent);
+  color: var(--app-danger);
+}

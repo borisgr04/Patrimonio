@@ -1,0 +1,8 @@
+<mat-button-toggle-group
+  [value]="theme.tema()"
+  (change)="theme.alternar()"
+  aria-label="Cambiar tema"
+>
+  <mat-button-toggle value="light">☀️</mat-button-toggle>
+  <mat-button-toggle value="dark">🌙</mat-button-toggle>
+</mat-button-toggle-group>

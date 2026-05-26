@@ -1,0 +1,28 @@
+<app-card title="Alertas de pago" subtitle="Seguimiento a vencimientos">
+  <div class="grid gap-4 text-sm">
+    <div>
+      <h4 class="font-medium">Próximos a vencer (3 días)</h4>
+      @if (proximos().length) {
+        <ul class="mt-2 space-y-2">
+          @for (item of proximos(); track item) {
+            <li class="rounded-2xl bg-[var(--app-surface-muted)] p-3">{{ item }}</li>
+          }
+        </ul>
+      } @else {
+        <p class="pos-subtle mt-2">No hay pagos próximos a vencer.</p>
+      }
+    </div>
+    <div>
+      <h4 class="font-medium">Contratos en mora</h4>
+      @if (enMora().length) {
+        <ul class="mt-2 space-y-2">
+          @for (item of enMora(); track item) {
+            <li class="rounded-2xl bg-[var(--app-surface-muted)] p-3">{{ item }}</li>
+          }
+        </ul>
+      } @else {
+        <p class="pos-subtle mt-2">Sin contratos en mora.</p>
+      }
+    </div>
+  </div>
+</app-card>

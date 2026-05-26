@@ -1,0 +1,46 @@
+<form class="pos-surface grid gap-4 p-5 md:grid-cols-2" [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field class="md:col-span-2"
+    ><mat-label>Inmueble</mat-label
+    ><mat-select formControlName="inmuebleId">
+      @for (inmueble of inmuebles(); track inmueble.id) {
+        <mat-option [value]="inmueble.id">{{ inmueble.alias }}</mat-option>
+      }
+    </mat-select></mat-form-field
+  >
+  <mat-form-field
+    ><mat-label>Fecha</mat-label><input matInput type="date" formControlName="fechaMantenimiento"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Tipo</mat-label
+    ><input matInput list="tipos-mant" formControlName="tipoMantenimiento" /><datalist
+      id="tipos-mant"
+    >
+      @for (tipo of sugerencias; track tipo) {
+        <option [value]="tipo"></option>
+      }</datalist
+  ></mat-form-field>
+  <mat-form-field class="md:col-span-2"
+    ><mat-label>Descripción</mat-label
+    ><textarea matInput rows="3" formControlName="descripcion"></textarea>
+  </mat-form-field>
+  <mat-form-field
+    ><mat-label>Proveedor</mat-label><input matInput formControlName="proveedor"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Teléfono proveedor</mat-label><input matInput formControlName="telefonoProveedor"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Costo total</mat-label><input matInput type="number" formControlName="costoTotal"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Estado</mat-label
+    ><mat-select formControlName="estado">
+      @for (estado of estados; track estado) {
+        <mat-option [value]="estado">{{ estado }}</mat-option>
+      }
+    </mat-select></mat-form-field
+  >
+  <div class="md:col-span-2 flex justify-end">
+    <button mat-flat-button type="submit">Guardar mantenimiento</button>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+<div class="pos-surface p-5">
+  <mat-stepper orientation="vertical" linear>
+    <mat-step [stepControl]="inmuebleForm" label="Paso 1 · Datos del inmueble">
+      <app-datos-contrato [form]="inmuebleForm" [inmuebles]="inmuebles()" />
+      <p class="pos-subtle mt-3 text-sm">Canon proyectado con IPC: {{ canonAjustado() }}</p>
+      <div class="mt-4 flex justify-end">
+        <button mat-stroked-button matStepperNext type="button">Continuar</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="arrendatarioForm" label="Paso 2 · Arrendatario">
+      <app-datos-arrendatario [form]="arrendatarioForm" />
+      <div class="mt-4 flex justify-between">
+        <button mat-button matStepperPrevious type="button">Atrás</button
+        ><button mat-stroked-button matStepperNext type="button">Continuar</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="codeudorForm" label="Paso 3 · Codeudor">
+      <app-datos-codeudor [form]="codeudorForm" />
+      <div class="mt-4 flex justify-between">
+        <button mat-button matStepperPrevious type="button">Atrás</button
+        ><button mat-flat-button type="button" (click)="submit()">Guardar contrato</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

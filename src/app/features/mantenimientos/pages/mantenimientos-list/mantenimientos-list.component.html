@@ -1,0 +1,30 @@
+<app-page-header
+  title="Mantenimientos"
+  description="Gestione mantenimientos por inmueble y actualice el estado de ejecución desde el listado."
+  actionLabel="Nuevo mantenimiento"
+  actionLink="/mantenimientos/nuevo"
+/>
+
+<div class="mb-6">
+  <mat-form-field>
+    <mat-label>Filtrar por inmueble, tipo o estado</mat-label>
+    <input matInput [ngModel]="filtro()" (ngModelChange)="filtro.set($event)" />
+  </mat-form-field>
+</div>
+
+@if (listaFiltrada().length) {
+  <div class="grid gap-4 lg:grid-cols-2">
+    @for (mantenimiento of listaFiltrada(); track mantenimiento.id) {
+      <app-mantenimiento-card
+        [mantenimiento]="mantenimiento"
+        [inmueble]="nombreInmueble(mantenimiento.inmuebleId)"
+        (cambiarEstado)="actualizarEstado(mantenimiento.id, $event)"
+      />
+    }
+  </div>
+} @else {
+  <app-empty-state
+    title="Sin mantenimientos"
+    description="Registre intervenciones y proveedores para llevar trazabilidad."
+  />
+}
