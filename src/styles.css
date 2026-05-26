@@ -1,0 +1,67 @@
+@import 'tailwindcss';
+
+:root {
+  --app-bg: #f8f7f4;
+  --app-surface: #ffffff;
+  --app-surface-muted: #efece4;
+  --app-text: #1a1a2e;
+  --app-muted: #6c6b76;
+  --app-accent: #8b6914;
+  --app-accent-contrast: #f8f7f4;
+  --app-border: rgba(26, 26, 46, 0.12);
+  --app-success: #1b8b5f;
+  --app-warning: #d17a00;
+  --app-danger: #bf2d2d;
+}
+
+:root[data-theme='dark'] {
+  --app-bg: #0a0d14;
+  --app-surface: #121826;
+  --app-surface-muted: #1a2233;
+  --app-text: #f0ead6;
+  --app-muted: #c1b9a3;
+  --app-accent: #c8a96e;
+  --app-accent-contrast: #0a0d14;
+  --app-border: rgba(240, 234, 214, 0.12);
+  --app-success: #68d391;
+  --app-warning: #f6ad55;
+  --app-danger: #fc8181;
+}
+
+html,
+body {
+  min-height: 100%;
+  background: var(--app-bg);
+  color: var(--app-text);
+}
+
+body {
+  margin: 0;
+  font-family: Inter, 'Segoe UI', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.pos-surface {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 1.5rem;
+}
+
+.pos-subtle {
+  color: var(--app-muted);
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}

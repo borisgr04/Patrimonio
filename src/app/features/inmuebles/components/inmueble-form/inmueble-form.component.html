@@ -1,0 +1,69 @@
+<form class="pos-surface grid gap-4 p-5 md:grid-cols-2" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="md:col-span-2">
+    <h2 class="text-xl font-semibold">{{ titulo() }}</h2>
+  </div>
+  <mat-form-field>
+    <mat-label>Alias</mat-label>
+    <input matInput formControlName="alias" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Tipo de inmueble</mat-label>
+    <input matInput list="tipos-inmueble" formControlName="tipoInmueble" />
+    <datalist id="tipos-inmueble">
+      @for (tipo of tipos; track tipo) {
+        <option [value]="tipo"></option>
+      }
+    </datalist>
+  </mat-form-field>
+  <mat-form-field class="md:col-span-2">
+    <mat-label>Dirección</mat-label>
+    <input matInput formControlName="direccion" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Ciudad</mat-label>
+    <input matInput formControlName="ciudad" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Municipio</mat-label>
+    <input matInput formControlName="municipio" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Barrio</mat-label>
+    <input matInput formControlName="barrio" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Estado</mat-label>
+    <mat-select formControlName="estado">
+      @for (estado of estados; track estado) {
+        <mat-option [value]="estado">{{ estado }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Torre</mat-label>
+    <input matInput formControlName="torre" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Piso</mat-label>
+    <input matInput formControlName="piso" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Apartamento</mat-label>
+    <input matInput formControlName="apartamento" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Valor comercial</mat-label>
+    <input matInput type="number" formControlName="valorComercial" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Valor catastral</mat-label>
+    <input matInput type="number" formControlName="valorCatastral" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Fecha de adquisición</mat-label>
+    <input matInput type="date" formControlName="fechaAdquisicion" />
+  </mat-form-field>
+  <div class="md:col-span-2 flex justify-end">
+    <button mat-flat-button type="submit">Guardar inmueble</button>
+  </div>
+</form>

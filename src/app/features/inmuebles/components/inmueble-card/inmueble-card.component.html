@@ -1,0 +1,38 @@
+@if (inmueble(); as item) {
+  <app-card [title]="item.alias" [subtitle]="item.tipoInmueble + ' · ' + item.ciudad">
+    <div class="space-y-4">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <p class="text-sm">{{ item.direccion }}</p>
+          <p class="pos-subtle text-sm">{{ item.barrio }} · {{ item.municipio }}</p>
+        </div>
+        <app-inmueble-estado-badge [estado]="item.estado" />
+      </div>
+
+      <div class="grid gap-3 text-sm sm:grid-cols-2">
+        <div>
+          <span class="pos-subtle">Valor comercial</span>
+          <p class="font-medium">{{ item.valorComercial | currencyCop }}</p>
+        </div>
+        <div>
+          <span class="pos-subtle">Valor catastral</span>
+          <p class="font-medium">{{ item.valorCatastral | currencyCop }}</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <a mat-stroked-button [routerLink]="['/inmuebles', item.id]">Ver detalle</a>
+        <a mat-button [routerLink]="['/inmuebles', item.id, 'editar']">Editar</a>
+        <button mat-button [matMenuTriggerFor]="menu" type="button">Cambiar estado</button>
+      </div>
+
+      <mat-menu #menu="matMenu">
+        @for (estado of estados; track estado) {
+          <button mat-menu-item type="button" (click)="cambiarEstado.emit(estado)">
+            {{ estado }}
+          </button>
+        }
+      </mat-menu>
+    </div>
+  </app-card>
+}

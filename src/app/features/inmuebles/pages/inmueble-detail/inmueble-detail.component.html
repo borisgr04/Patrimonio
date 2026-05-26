@@ -1,0 +1,62 @@
+<app-page-header
+  [title]="esNuevo() ? 'Nuevo inmueble' : (inmueble()?.alias ?? 'Detalle del inmueble')"
+  description="Consulte el historial contractual y registre la información clave del activo inmobiliario."
+  actionLabel="Volver al listado"
+  actionLink="/inmuebles"
+/>
+
+<app-inmueble-form [inmueble]="inmueble()" (guardar)="guardar($event)" />
+
+@if (!esNuevo() && inmueble(); as item) {
+  <div class="mt-6 grid gap-4 lg:grid-cols-2">
+    <app-card title="Resumen patrimonial" subtitle="Valores de referencia">
+      <dl class="grid gap-3 text-sm">
+        <div class="flex justify-between gap-3">
+          <dt>Valor comercial</dt>
+          <dd>{{ item.valorComercial | currencyCop }}</dd>
+        </div>
+        <div class="flex justify-between gap-3">
+          <dt>Valor catastral</dt>
+          <dd>{{ item.valorCatastral | currencyCop }}</dd>
+        </div>
+        <div class="flex justify-between gap-3">
+          <dt>Fecha de adquisición</dt>
+          <dd>{{ item.fechaAdquisicion | fechaEs }}</dd>
+        </div>
+      </dl>
+    </app-card>
+
+    <app-card title="Contratos asociados" subtitle="Historial contractual">
+      @if (contratosRelacionados().length) {
+        <ul class="space-y-3 text-sm">
+          @for (contrato of contratosRelacionados(); track contrato.id) {
+            <li class="rounded-2xl bg-[var(--app-surface-muted)] p-3">
+              <div class="font-medium">{{ contrato.numeroContrato }}</div>
+              <div class="pos-subtle">
+                {{ contrato.fechaInicio | fechaEs }} → {{ contrato.fechaFin | fechaEs }}
+              </div>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="pos-subtle text-sm">Aún no hay contratos para este inmueble.</p>
+      }
+    </app-card>
+
+    <app-card title="Mantenimientos" subtitle="Intervenciones registradas" class="lg:col-span-2">
+      @if (mantenimientosRelacionados().length) {
+        <div class="grid gap-3 md:grid-cols-2">
+          @for (mantenimiento of mantenimientosRelacionados(); track mantenimiento.id) {
+            <article class="rounded-2xl bg-[var(--app-surface-muted)] p-4 text-sm">
+              <h3 class="font-medium">{{ mantenimiento.tipoMantenimiento }}</h3>
+              <p class="pos-subtle">{{ mantenimiento.descripcion }}</p>
+              <p class="mt-2">{{ mantenimiento.fechaMantenimiento | fechaEs }}</p>
+            </article>
+          }
+        </div>
+      } @else {
+        <p class="pos-subtle text-sm">Sin mantenimientos asociados.</p>
+      }
+    </app-card>
+  </div>
+}

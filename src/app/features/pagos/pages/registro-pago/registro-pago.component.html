@@ -1,0 +1,14 @@
+<app-page-header
+  title="Registrar pago"
+  description="Registre el pago, calcule automáticamente el saldo pendiente y comparta la confirmación por WhatsApp."
+  actionLabel="Volver a pagos"
+  actionLink="/pagos"
+/>
+
+<app-pago-form [contratos]="contratos" [contratoId]="contratoId()" (guardar)="guardar($event)" />
+
+@if (ultimoLink()) {
+  <div class="mt-4">
+    <app-whatsapp-button [link]="ultimoLink()" />
+  </div>
+}

@@ -1,0 +1,50 @@
+<form class="pos-surface grid gap-4 p-5 md:grid-cols-2" [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field class="md:col-span-2">
+    <mat-label>Contrato</mat-label>
+    <mat-select formControlName="contratoId">
+      @for (contrato of contratos(); track contrato.id) {
+        <mat-option [value]="contrato.id">{{ contrato.numeroContrato }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field
+    ><mat-label>Mes corresponde</mat-label
+    ><input matInput type="month" formControlName="mesCorresponde"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Fecha pago</mat-label><input matInput type="date" formControlName="fechaPago"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Valor esperado</mat-label
+    ><input matInput type="number" formControlName="valorEsperado"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Valor pagado</mat-label><input matInput type="number" formControlName="valorPagado"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Tipo pago</mat-label
+    ><mat-select formControlName="tipoPago">
+      @for (tipo of tipos; track tipo) {
+        <mat-option [value]="tipo">{{ tipo }}</mat-option>
+      }
+    </mat-select></mat-form-field
+  >
+  <mat-form-field
+    ><mat-label>Método pago</mat-label
+    ><mat-select formControlName="metodoPago">
+      @for (metodo of metodos; track metodo) {
+        <mat-option [value]="metodo">{{ metodo }}</mat-option>
+      }
+    </mat-select></mat-form-field
+  >
+  <mat-form-field
+    ><mat-label>Comprobante</mat-label><input matInput formControlName="numeroComprobante"
+  /></mat-form-field>
+  <mat-form-field class="md:col-span-2"
+    ><mat-label>Nota</mat-label><textarea matInput rows="3" formControlName="nota"></textarea>
+  </mat-form-field>
+  <div class="md:col-span-2 flex items-center justify-between gap-3">
+    <p class="pos-subtle text-sm">Saldo pendiente automático: {{ saldoPendienteTexto() }}</p>
+    <button mat-flat-button type="submit">Registrar pago</button>
+  </div>
+</form>

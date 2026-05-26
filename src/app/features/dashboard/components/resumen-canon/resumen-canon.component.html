@@ -1,0 +1,12 @@
+<app-card title="Resumen mensual del canon" subtitle="Esperado vs recaudado">
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <p class="pos-subtle text-sm">Esperado</p>
+      <p class="text-2xl font-semibold">{{ esperado() | currencyCop }}</p>
+    </div>
+    <div>
+      <p class="pos-subtle text-sm">Recaudado</p>
+      <p class="text-2xl font-semibold">{{ recaudado() | currencyCop }}</p>
+    </div>
+  </div>
+</app-card>

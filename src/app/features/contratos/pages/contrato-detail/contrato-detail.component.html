@@ -1,0 +1,55 @@
+<app-page-header
+  [title]="id() ? (contrato()?.numeroContrato ?? 'Detalle del contrato') : 'Nuevo contrato'"
+  description="Genere contratos con consecutivo automático, cálculo IPC y detalle de pagos."
+  actionLabel="Volver a contratos"
+  actionLink="/contratos"
+/>
+
+@if (!id()) {
+  <app-contrato-form [inmuebles]="inmuebles" (guardar)="guardar($event)" />
+} @else if (contrato(); as item) {
+  <div class="grid gap-4 lg:grid-cols-2">
+    <app-card title="Resumen del contrato" subtitle="Información principal">
+      <dl class="grid gap-3 text-sm">
+        <div class="flex justify-between gap-3">
+          <dt>Arrendatario</dt>
+          <dd>{{ nombrePersona(item.arrendatarioId) }}</dd>
+        </div>
+        <div class="flex justify-between gap-3">
+          <dt>Codeudor</dt>
+          <dd>{{ nombrePersona(item.codeudorId) }}</dd>
+        </div>
+        <div class="flex justify-between gap-3">
+          <dt>Canon</dt>
+          <dd>{{ item.canonMensual | currencyCop }}</dd>
+        </div>
+        <div class="flex justify-between gap-3">
+          <dt>Canon con IPC</dt>
+          <dd>{{ item.canonConIPC | currencyCop }}</dd>
+        </div>
+        <div class="flex justify-between gap-3">
+          <dt>Vigencia</dt>
+          <dd>{{ item.fechaInicio | fechaEs }} → {{ item.fechaFin | fechaEs }}</dd>
+        </div>
+      </dl>
+    </app-card>
+
+    <app-card title="Pagos del contrato" subtitle="Últimos registros">
+      @if (pagos().length) {
+        <ul class="space-y-3 text-sm">
+          @for (pago of pagos(); track pago.id) {
+            <li class="rounded-2xl bg-[var(--app-surface-muted)] p-3">
+              <div class="font-medium">{{ pago.mesCorresponde }}</div>
+              <div class="pos-subtle">{{ pago.valorPagado | currencyCop }} pagados</div>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="pos-subtle text-sm">Aún no hay pagos para este contrato.</p>
+      }
+      <div class="mt-4">
+        <a mat-flat-button [routerLink]="['/pagos/nuevo', item.id]">Registrar pago</a>
+      </div>
+    </app-card>
+  </div>
+}

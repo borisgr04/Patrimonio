@@ -1,0 +1,16 @@
+<app-card title="Estado de inmuebles" subtitle="Inventario actual">
+  <div class="grid gap-3 text-sm md:grid-cols-3">
+    <article class="rounded-2xl bg-[var(--app-surface-muted)] p-4">
+      <div class="pos-subtle">Disponibles</div>
+      <div class="text-2xl font-semibold">{{ disponibles() }}</div>
+    </article>
+    <article class="rounded-2xl bg-[var(--app-surface-muted)] p-4">
+      <div class="pos-subtle">Arrendados</div>
+      <div class="text-2xl font-semibold">{{ arrendados() }}</div>
+    </article>
+    <article class="rounded-2xl bg-[var(--app-surface-muted)] p-4">
+      <div class="pos-subtle">En mantenimiento</div>
+      <div class="text-2xl font-semibold">{{ mantenimientos() }}</div>
+    </article>
+  </div>
+</app-card>
